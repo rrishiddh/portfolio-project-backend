@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String?
+  role          Role      @default(USER)
+  avatar        String?
+  googleId      String?   @unique
+  emailVerified Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  blogs     Blog[]
+  projects  Project[]
+  resumes   Resume[]
+
+  @@map("users")
+}
+
+model Blog {
+  id          String      @id @default(cuid())
+  title       String
+  slug        String      @unique
+  content     String
+  excerpt     String?
+  coverImage  String?
+  published   Boolean     @default(false)
+  featured    Boolean     @default(false)
+  views       Int         @default(0)
+  readTime    Int?        
+  tags        String[]
+  seoTitle    String?
+  seoDescription String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  publishedAt DateTime?
+
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId String
+
+  @@map("blogs")
+}
+
+model Project {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  description String
+  content     String?
+  thumbnail   String?
+  images      String[]
+  technologies String[]
+  features    String[]
+  liveUrl     String?
+  githubUrl   String?
+  status      ProjectStatus @default(COMPLETED)
+  featured    Boolean   @default(false)
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId String
+
+  @@map("projects")
+}
+
+model Resume {
+  id           String    @id @default(cuid())
+  title        String
+  personalInfo Json      
+  experience   Json?     
+  education    Json?     
+  skills       Json?     
+  projects     Json?     
+  template     String    @default("modern")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@map("resumes")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ProjectStatus {
+  IN_PROGRESS
+  COMPLETED
+  ARCHIVED
+}
