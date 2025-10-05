@@ -45,7 +45,7 @@ This backend provides RESTful APIs for managing **projects, blogs, contact messa
 | Framework | Express.js |
 | ORM / DB Layer | Prisma (or other ORM) |
 | Database | PostgreSQL / MySQL / SQLite |
-| Deployment | Vercel / Render / Railway |
+| Deployment | Vercel |
 | Tools | Nodemon, ts-node, dotenv, etc. |
 
 ---
