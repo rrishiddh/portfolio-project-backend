@@ -52,6 +52,7 @@ This backend provides RESTful APIs for managing **projects, blogs, contact messa
 
 ##  Project Structure
 
+```
 portfolio-project-backend/
 ├── prisma/
 │ ├── schema.prisma
@@ -67,14 +68,7 @@ portfolio-project-backend/
 ├── package.json
 ├── tsconfig.json
 └── vercel.json
-
-
-- `prisma/` — database schema and migration files  
-- `controllers/` — business logic for routes  
-- `routes/` — API endpoint definitions  
-- `services/` — core functionality and DB interaction  
-- `middlewares/` — reusable Express middleware  
-- `utils/` — helper functions  
+```
 
 ---
 
@@ -141,7 +135,7 @@ npm run dev
 
 ## Links: 
 
-### Live Demo (API): [https://portfolio-backend-rrishiddh.vercel.app/](https://portfolio-backend-rrishiddh.vercel.app//)
+### Live Demo (API): [https://portfolio-backend-rrishiddh.vercel.app/](https://portfolio-backend-rrishiddh.vercel.app/)
 
 ### Live Demo (Frontend): [https://portfolio-frontend-rrishiddh.vercel.app/](https://portfolio-frontend-rrishiddh.vercel.app/)
 
