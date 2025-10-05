@@ -4,7 +4,7 @@ import { hashPassword } from '../src/utils/bcrypt';
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('🌱 Seeding database...');
+  console.log(' Seeding database...');
 
   const adminPassword = await hashPassword('admin123');
   const admin = await prisma.user.upsert({
@@ -34,7 +34,7 @@ async function main() {
     },
   });
 
-  console.log('👤 Created users:', { admin: admin.email, user: user.email });
+  console.log(' Created users:', { admin: admin.email, user: user.email });
 
   const blog1 = await prisma.blog.create({
     data: {
@@ -282,7 +282,7 @@ Master React Hooks to write cleaner, more maintainable React code!`,
     },
   });
 
-  console.log('📝 Created blog posts:', { 
+  console.log(' Created blog posts:', { 
     blog1: blog1.title, 
     blog2: blog2.title,
     blog3: blog3.title 
@@ -496,7 +496,7 @@ Built to showcase API integration and data visualization skills.`,
     },
   });
 
-  console.log('🚀 Created projects:', { 
+  console.log(' Created projects:', { 
     project1: project1.title, 
     project2: project2.title,
     project3: project3.title 
@@ -615,15 +615,15 @@ Built to showcase API integration and data visualization skills.`,
     },
   });
 
-  console.log('📄 Created resume:', resume.title);
+  console.log(' Created resume:', resume.title);
 
-  console.log('\n✅ Seeding completed successfully!');
-  console.log('\n📊 Summary:');
+  console.log('\n Seeding completed successfully!');
+  console.log('\n Summary:');
   console.log(`   Users: 2 (1 Admin, 1 User)`);
   console.log(`   Blogs: 3`);
   console.log(`   Projects: 3`);
   console.log(`   Resumes: 1`);
-  console.log('\n🔐 Login Credentials:');
+  console.log('\n Login Credentials:');
   console.log(`   Admin: admin@portfolio.com / admin123`);
   console.log(`   User:  user@portfolio.com / user123`);
 }
