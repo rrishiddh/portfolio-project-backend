@@ -40,10 +40,10 @@ This backend provides RESTful APIs for managing **projects, blogs, contact messa
 
 | Layer | Technology |
 |-------|------------|
-| Language | TypeScript / JavaScript |
+| Language | TypeScript |
 | Runtime | Node.js |
 | Framework | Express.js |
-| ORM / DB Layer | Prisma (or other ORM) |
+| ORM  | Prisma (or other ORM) |
 | Database | PostgreSQL / MySQL / SQLite |
 | Deployment | Vercel |
 | Tools | Nodemon, ts-node, dotenv, etc. |
