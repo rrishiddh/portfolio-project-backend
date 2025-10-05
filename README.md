@@ -1,7 +1,7 @@
-# Portfolio Project — Backend
+# Portfolio Project — API 
 
 A powerful and scalable backend service for a personal **developer portfolio application**.  
-This backend provides RESTful APIs for managing **projects, blogs, contact messages**, and more — built with Node.js, Express, and Prisma (or any ORM).
+This backend provides RESTful APIs for managing **projects, blogs, contact messages** and more — built with Node.js, Express, and Prisma (or any ORM).
 
 ---
 
