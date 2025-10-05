@@ -15,20 +15,17 @@ interface AuthRequest extends Request {
     role: string;
   };
 }
-
 export const register = asyncHandler(async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
 
   const existingUser = await prisma.user.findUnique({
     where: { email },
   });
-
   if (existingUser) {
     throw new AppError('User with this email already exists', 409);
   }
 
   const hashedPassword = await hashPassword(password);
-
   const user = await prisma.user.create({
     data: {
       name,
@@ -63,7 +60,6 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
 
 export const login = asyncHandler(async (req: Request, res: Response) => {
   const { email, password } = req.body;
-
   const user = await prisma.user.findUnique({
     where: { email },
     select: {
@@ -85,13 +81,11 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
   if (!isValidPassword) {
     throw new AppError('Invalid email or password', 401);
   }
-
   const tokens = generateTokens({
     userId: user.id,
     email: user.email,
     role: user.role,
   });
-
   const { password: _, ...userWithoutPassword } = user;
 
   res.json({
@@ -106,7 +100,6 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
 
 export const googleAuth = asyncHandler(async (req: Request, res: Response) => {
   const { token } = req.body;
-
   try {
     const ticket = await googleClient.verifyIdToken({
       idToken: token,
@@ -193,10 +186,8 @@ export const refreshToken = asyncHandler(async (req: Request, res: Response) => 
   if (!refreshToken) {
     throw new AppError('Refresh token is required', 401);
   }
-
   try {
     const decoded = verifyRefreshToken(refreshToken);
-
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
       select: {
@@ -209,7 +200,6 @@ export const refreshToken = asyncHandler(async (req: Request, res: Response) => 
     if (!user) {
       throw new AppError('User not found', 404);
     }
-
     const tokens = generateTokens({
       userId: user.id,
       email: user.email,

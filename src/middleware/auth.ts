@@ -30,7 +30,6 @@ export const authenticate = asyncHandler(
 
     try {
       const decoded = verifyToken(token);
-
       const user = await prisma.user.findUnique({
         where: { id: decoded.userId },
         select: {
@@ -39,11 +38,9 @@ export const authenticate = asyncHandler(
           role: true,
         },
       });
-
       if (!user) {
         throw new AppError('User not found', 401);
       }
-
       req.user = user;
       next();
     } catch (error) {
@@ -57,11 +54,9 @@ export const authorize = (...roles: string[]) => {
     if (!req.user) {
       throw new AppError('Access token is required', 401);
     }
-
     if (!roles.includes(req.user.role)) {
       throw new AppError('Insufficient permissions', 403);
     }
-
     next();
   };
 };
@@ -69,7 +64,6 @@ export const authorize = (...roles: string[]) => {
 export const optionalAuth = asyncHandler(
   async (req: AuthRequest, res: Response, next: NextFunction) => {
     let token;
-
     if (
       req.headers.authorization &&
       req.headers.authorization.startsWith('Bearer')
@@ -95,7 +89,6 @@ export const optionalAuth = asyncHandler(
       } catch (error) {
       }
     }
-
     next();
   }
 );
