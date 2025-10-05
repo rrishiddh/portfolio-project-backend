@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -13,7 +14,7 @@ import resumeRoutes from './routes/resume';
 import userRoutes from './routes/user';
 
 import { errorHandler, notFound } from './middleware/errorHandler';
-
+dotenv.config();
 const app = express();
 const prisma = new PrismaClient();
 
